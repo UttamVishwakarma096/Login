@@ -28,12 +28,12 @@ app.post("/login", async (req, res) => {
 
     if (user) {
       if (user.password === password) {
-        res.json({ massage: "Login Succsess!", user: user });
+        res.json({ message: "Login Succsess!", user: user });
       } else {
-        res.json({ massage: "Wrong Password" });
+        res.json({ message: "Wrong Password" });
       }
     } else {
-      res.status(404).json({ massage: "User not found" });
+      res.status(404).json({ message: "User not found" });
     }
   } catch (error) {
     res.status(500).json({ error: "server error" });

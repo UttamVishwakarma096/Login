@@ -8,10 +8,12 @@ function App() {
     e.preventDefault();
     try {
       const res = await axios.post("http://localhost:3000/login", user);
-      console.log("Server response: ", res.data.massage);
+      console.log("Server response: ", res.data.message);
+      alert(res.data.message);
+      setUser({ username: "", password: "" });
     } catch (err) {
-      console.error("Login fail: ", err);
-      alert("Login failed");
+      console.error("Login fail: ", err.response?.data?.message);
+      alert(err.response?.data?.message || "Login failed");
     }
   };
 
@@ -33,6 +35,7 @@ function App() {
               type="text"
               name="username"
               placeholder="username"
+              value={user.username}
               onChange={handleOnChange}
               className="text-2xl p-3 rounded-xl bg-white border-none my-3"
             />{" "}
@@ -40,13 +43,14 @@ function App() {
             <input
               type="password"
               name="password"
+              value={user.password}
               onChange={handleOnChange}
               placeholder="password"
               className="text-2xl p-3 rounded-xl bg-white border-none my-3"
             />{" "}
             <br />
             <button
-              className="bg-blue-400 w-full text-2xl text-white rounded-2xl cursor-pointer p-3 my-3"
+              className="bg-blue-500 w-full text-2xl text-white rounded-2xl cursor-pointer p-3 my-3 hover:bg-blue-600 duration-200"
               type="submit"
             >
               Login
